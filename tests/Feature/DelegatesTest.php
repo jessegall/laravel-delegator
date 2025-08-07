@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use JesseGall\Delegator\Delegates;
+use JesseGall\Delegator\PropertyLinker;
 use Orchestra\Testbench\TestCase;
 
 class DelegatesTest extends TestCase
@@ -34,6 +35,20 @@ class DelegatesTest extends TestCase
         $this->assertEquals(2, $delegator->delegate->count);
     }
 
+
+    public function test_WhenSettingUndefinedPropertyThroughTargetLinkIsCreated()
+    {
+        $linker = new PropertyLinker();
+        $source = new PropertyLinkerTestSource();
+        $target = new PropertyLinkerTestTarget();
+
+        $linker->linkProperties($source, $target);
+
+        $target->undefinedProperty = 'new value';
+
+        $this->assertTrue(isset($target->undefinedProperty));
+        $this->assertSame($source->undefinedProperty, $target->undefinedProperty);
+    }
 }
 
 class DelegatorTestSource

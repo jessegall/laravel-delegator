@@ -120,7 +120,6 @@ class PropertyLinkerTest extends TestCase
         $this->assertSame('overlapping private property', $target->getOverlappingPrivateProperty());
     }
 
-
 }
 
 class PropertyLinkerTestSource
@@ -134,7 +133,7 @@ class PropertyLinkerTestSource
     public string $undefinedProperty;
 }
 
-#[AllowDynamicProperties]
+
 class PropertyLinkerTestTarget
 {
     public string $overlappingProperty = 'overlapping property';
